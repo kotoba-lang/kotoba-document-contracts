@@ -4,21 +4,34 @@ Zero-dep portable `.cljc` — the shared data-shape CONTRACT for kotoba's
 document-rendering pipeline (parse → cascade → layout → paint), split out so
 that both the existing JVM/ClojureScript implementation
 (`kotoba-lang/htmldom` + `kotoba-lang/cssom`, consumed by
-`kotoba-lang/browser`) and a future non-Clojure implementation (a Rust/Wasm
-renderer for `aiueos`'s own system UI, "mainuiux") can conform to the SAME
-interchange shapes without either side owning the other's runtime.
+`kotoba-lang/browser`) and a future `aiueos`-side implementation of its own
+system UI ("mainuiux") can conform to the SAME interchange shapes without
+either side owning the other's runtime.
+
+`aiueos`'s own documented direction is a "self-hosting" trajectory: move
+semantic authority out of Rust and into `.kotoba` source (safe Kotoba, a
+Clojure-shaped capability-safe language), compiled to a Wasm component and
+run under `aiueos`'s own broker/policy layer — Rust stays only as adapter/
+bootstrap, never the semantic authority (`kotoba-lang/kotoba-lang`'s own
+`ADR-safe-capability-language.md`). `kotoba-lang/kotoba` already completed an
+analogous move for its OWN compiler path, replacing a Rust `kotoba-clj`
+compiler with a JVM-Clojure implementation running on Chicory. A future
+mainuiux renderer conforming to this contract is expected to follow the same
+pattern: `.kotoba` source, not hand-written Rust. (Honesty check: `aiueos`'s
+own checked-out repo today still has a real `Cargo.toml`/Rust `src/` — this
+is the documented DIRECTION, not yet aiueos's own shipped state.)
 
 ## Status
 
 **Stub / contract-only** (ADR-2607061930). This repo defines DATA SHAPES and
 lightweight structural predicates — it contains **no parser, no cascade
 engine, no layout algorithm**. Those stay in `htmldom`/`cssom` as the
-reference implementation; a future `aiueos`-side renderer implements its own
-algorithm independently and validates its OUTPUT against these same shapes.
-This mirrors the existing `kotoba-core-contracts`/`kotoba-adapter-contracts`
-pattern in this org: "native hosts adapt to the CLJC contract in their own
-repositories" (see `kototama`'s own README) rather than the contract owning
-the semantics.
+reference implementation; a future `aiueos`-side renderer (in `.kotoba`, per
+the self-hosting direction above) implements its own algorithm independently
+and validates its OUTPUT against these same shapes. This mirrors the
+existing `kotoba-core-contracts`/`kotoba-adapter-contracts` pattern in this
+org: "native hosts adapt to the CLJC contract in their own repositories"
+(see `kototama`'s own README) rather than the contract owning the semantics.
 
 ## Contract surface
 
@@ -35,8 +48,8 @@ the semantics.
   `dom-gpu` paint hosts (WebGL/WebGPU) already consume. This is the single
   most directly reusable piece for a future `aiueos` renderer: any painter
   that can consume this exact op vocabulary can reuse the existing
-  `htmldom` → `cssom` pipeline's output regardless of what runtime painted
-  it.
+  `htmldom` → `cssom` pipeline's output regardless of what language or
+  runtime painted it.
 
 ## Non-goals (why this is a narrow stub, not a general document/UI framework)
 
