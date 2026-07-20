@@ -50,6 +50,8 @@ org: "native hosts adapt to the CLJC contract in their own repositories"
   that can consume this exact op vocabulary can reuse the existing
   `htmldom` → `cssom` pipeline's output regardless of what language or
   runtime painted it.
+- `src/kotoba/document/change.cljc` — domain-neutral append-only document
+  change events and deterministic replay, shared by collaborative editors.
 
 ## Non-goals (why this is a narrow stub, not a general document/UI framework)
 
