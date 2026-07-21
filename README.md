@@ -52,6 +52,9 @@ org: "native hosts adapt to the CLJC contract in their own repositories"
   runtime painted it.
 - `src/kotoba/document/change.cljc` — domain-neutral append-only document
   change events and deterministic replay, shared by collaborative editors.
+- `src/kotoba/document/artifact_graph.cljc` — domain-neutral, incremental
+  dependency execution for derived artifacts such as drawings, analysis
+  results, exchange documents, previews, and publication payloads.
 
 ## Non-goals (why this is a narrow stub, not a general document/UI framework)
 
