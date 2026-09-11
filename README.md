@@ -35,24 +35,24 @@ org: "native hosts adapt to the CLJC contract in their own repositories"
 
 ## Contract surface
 
-- `src/kotoba/document/dom.cljc` — the trusted-subset DOM tree node shape
+- `src/kotoba/document/dom.cljk` — the trusted-subset DOM tree node shape
   (`:node/id`/`:tag`/`:attrs`/`:children`, plus the text-node variant) that
   `kotoba.wasm.dom` (in `dom-gpu`) already produces and `htmldom` already
   parses into.
-- `src/kotoba/document/style.cljc` — the resolved-style map shape `cssom`'s
+- `src/kotoba/document/style.cljk` — the resolved-style map shape `cssom`'s
   cascade already produces (a flat map of CSS-property keywords to resolved
   values), scoped to the properties this stack actually supports today (box
   model, flexbox, grid, basic text styling) — NOT full CSS.
-- `src/kotoba/document/draw_ops.cljc` — the draw-ops vocabulary (`:rect`/
+- `src/kotoba/document/draw_ops.cljk` — the draw-ops vocabulary (`:rect`/
   `:text`/`:clip`/`:node`) `cssom.layout` already emits and both
   `dom-gpu` paint hosts (WebGL/WebGPU) already consume. This is the single
   most directly reusable piece for a future `aiueos` renderer: any painter
   that can consume this exact op vocabulary can reuse the existing
   `htmldom` → `cssom` pipeline's output regardless of what language or
   runtime painted it.
-- `src/kotoba/document/change.cljc` — domain-neutral append-only document
+- `src/kotoba/document/change.cljk` — domain-neutral append-only document
   change events and deterministic replay, shared by collaborative editors.
-- `src/kotoba/document/artifact_graph.cljc` — domain-neutral, incremental
+- `src/kotoba/document/artifact_graph.cljk` — domain-neutral, incremental
   dependency execution for derived artifacts such as drawings, analysis
   results, exchange documents, previews, and publication payloads.
 
