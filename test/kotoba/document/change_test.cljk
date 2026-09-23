@@ -1,5 +1,5 @@
 (ns kotoba.document.change-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.document.change :as change]))
 
 (deftest deterministic-replay

@@ -1,5 +1,5 @@
 (ns kotoba.document.dom-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.document.dom :as dom]))
 
 (deftest a-real-element-node-shape-is-recognized
