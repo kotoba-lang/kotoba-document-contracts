@@ -1,5 +1,5 @@
 (ns kotoba.document.draw-ops-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.document.draw-ops :as draw-ops]))
 
 (deftest a-real-rect-op-is-recognized

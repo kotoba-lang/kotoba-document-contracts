@@ -1,5 +1,5 @@
 (ns kotoba.document.style-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kotoba.document.style :as style]))
 
 (deftest an-empty-style-map-is-valid
